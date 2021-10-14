@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+#laborator3
 namespace Pui_MadalinaMaria_Lab2.Models
 {
     public class Book
