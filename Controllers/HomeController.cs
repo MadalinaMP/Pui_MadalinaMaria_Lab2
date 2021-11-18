@@ -48,5 +48,10 @@ namespace Pui_MadalinaMaria_Lab2.Controllers
             };
             return View(await data.AsNoTracking().ToListAsync());
         }
+
+        public IActionResult Chat()
+        {
+            return View();
+        }
     }
 }
