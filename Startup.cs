@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Pui_MadalinaMaria_Lab2.Data;
 using Microsoft.EntityFrameworkCore;
 using Pui_MadalinaMaria_Lab2.Hubs;
+using Pui_MadalinaMaria_Lab2.Areas.Identity;
 
 namespace Pui_MadalinaMaria_Lab2
 {
@@ -49,6 +50,7 @@ namespace Pui_MadalinaMaria_Lab2
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -57,6 +59,7 @@ namespace Pui_MadalinaMaria_Lab2
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapRazorPages();
             });
         }
     }
