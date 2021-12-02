@@ -7,24 +7,24 @@
         <th>Issuer</th>
         <th>Type</th>
         <th>Value</th>
+        <th>Delete</th>
     </tr>
     @foreach (var claim in Model.OrderBy(x => x.Type))
     {
-<tr>
-    <td>@claim.Subject.Name</td>
-    <td>@claim.Issuer</td>
-    <td>@claim.Type</td>
-    <td>@claim.Value</td>
-    <th>Delete</th>
-    <td>
-        <form asp-action="Delete" method="post">
-            <input type="hidden" name="claimValues"
-                   value="@claim.Type;@claim.Value;@claim.Issuer" />
-            <button type="submit" class="btn btn-sm btn-danger">
-                Delete
-            </button>
-        </form>
-    </td>
-</tr>
+        <tr>
+            <td>@claim.Subject.Name</td>
+            <td>@claim.Issuer</td>
+            <td>@claim.Type</td>
+            <td>@claim.Value</td>
+            <td>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" name="claimValues"
+                           value="@claim.Type;@claim.Value;@claim.Issuer" />
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
     }
 </table>
