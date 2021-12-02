@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Identity.Models;
+
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
@@ -43,7 +43,7 @@ namespace Pui_MadalinaMaria_Lab2.Controllers
             [HttpPost]
             public async Task<IActionResult> Delete(string claimValues)
             {
-                IdentityUseruser = await
+                IdentityUser user = await
                userManager.GetUserAsync(HttpContext.User);
                 string[] claimValuesArray = claimValues.Split(";");
                 string claimType = claimValuesArray[0], claimValue =

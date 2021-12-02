@@ -12,6 +12,7 @@ using Pui_MadalinaMaria_Lab2.Data;
 using Microsoft.EntityFrameworkCore;
 using Pui_MadalinaMaria_Lab2.Hubs;
 using Pui_MadalinaMaria_Lab2.Areas.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace Pui_MadalinaMaria_Lab2
 {
@@ -30,6 +31,38 @@ namespace Pui_MadalinaMaria_Lab2
             services.AddControllersWithViews();
             services.AddDbContext<LibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSignalR();
+            services.AddRazorPages();
+
+            services.Configure<IdentityOptions>(options => {
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.Lockout.AllowedForNewUsers = true;
+                });
+
+            services.Configure<IdentityOptions>(options => { 
+                options.Password.RequireDigit= true;
+                options.Password.RequireLowercase= true;
+                options.Password.RequireNonAlphanumeric= true;
+                options.Password.RequireUppercase= true;
+                options.Password.RequiredLength= 8;
+            });
+
+                services.AddAuthorization(opts => {
+                opts.AddPolicy("OnlySales", policy => {
+                    policy.RequireClaim("Department", "Sales");
+                });
+            });
+
+            services.AddAuthorization(opts => {
+                opts.AddPolicy("SalesManager", policy => {
+                    policy.RequireRole("Manager");
+                    policy.RequireClaim("Department", "Sales");
+                });
+            });
+            services.ConfigureApplicationCookie(opts =>
+            {
+                opts.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

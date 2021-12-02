@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,8 +10,10 @@ using Pui_MadalinaMaria_Lab2.Data;
 using Pui_MadalinaMaria_Lab2.Models;
 using Pui_MadalinaMaria_Lab2.Models.LibraryViewModels;
 
+
 namespace Pui_MadalinaMaria_Lab2.Controllers
 {
+    [Authorize(Policy = "OnlySales")]
     public class PublishersController : Controller
     {
         private readonly LibraryContext _context;
