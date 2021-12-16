@@ -19,7 +19,7 @@ namespace Pui_MadalinaMaria_Lab2.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("IdentityContextConnection")));
 
-                services.AddIdentity<IdentityUser, IdentityRole>(options =>
+                services.AddDefaultIdentity<IdentityUser>(options =>
                         options.SignIn.RequireConfirmedAccount = true)
                         .AddEntityFrameworkStores<IdentityContext>();
             });
